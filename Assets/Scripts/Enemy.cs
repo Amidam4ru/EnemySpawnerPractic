@@ -1,39 +1,49 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
-    [SerializeField] private float _lifeTime = 5f;
 
-    private Coroutine _releaseCorutine;
-    private WaitForSeconds _releaseDelay;
-    public event Action<Enemy> Died;
+    private Target _target;
+    private float _degreeRotationInterpolation;
+
+    public event Action<Enemy> Finished;
 
     private void Awake()
     {
-        _releaseDelay = new WaitForSeconds(_lifeTime);
-    }
-
-    private void OnEnable()
-    {
-        _releaseCorutine = StartCoroutine(Release());
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(_releaseCorutine);
+        _degreeRotationInterpolation = 1f;
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+        Vector3 moveDirection = (_target.gameObject.transform.position - transform.position).normalized;
+        transform.position += moveDirection * _speed * Time.deltaTime;
+
+        Vector3 directionToTarget = _target.transform.position - transform.position;
+        directionToTarget.y = 0;
+
+        if (directionToTarget != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _degreeRotationInterpolation);
+        }
     }
 
-    private IEnumerator Release()
+    public void SetTarget(Target target)
     {
-        yield return _releaseDelay;
-        Died?.Invoke(this);
+        _target = target;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Target collisionTarget;
+
+        if (collision.transform.TryGetComponent<Target>(out collisionTarget) && collisionTarget == _target)
+        {
+            Finished?.Invoke(this);
+        }
     }
 }
