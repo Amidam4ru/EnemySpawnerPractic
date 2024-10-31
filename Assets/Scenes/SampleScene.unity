@@ -629,7 +629,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05cd9ff3b4cd459b02ae352fd521a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstPoutePoint: {fileID: 657209568}
+  _routePoints:
+  - {fileID: 657209568}
+  - {fileID: 1271891787}
   _secondPoutePoint: {fileID: 1271891787}
   _acceptablePproximity: 0.5
   _speed: 2
@@ -777,7 +779,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05cd9ff3b4cd459b02ae352fd521a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstPoutePoint: {fileID: 1672460330}
+  _routePoints:
+  - {fileID: 1672460330}
+  - {fileID: 61274821}
   _secondPoutePoint: {fileID: 61274821}
   _acceptablePproximity: 0.5
   _speed: 1
@@ -1290,7 +1294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05cd9ff3b4cd459b02ae352fd521a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstPoutePoint: {fileID: 2074140783}
+  _routePoints:
+  - {fileID: 2074140783}
+  - {fileID: 425343988}
   _secondPoutePoint: {fileID: 425343988}
   _acceptablePproximity: 0.5
   _speed: 1
@@ -1450,7 +1456,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05cd9ff3b4cd459b02ae352fd521a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstPoutePoint: {fileID: 676117382}
+  _routePoints:
+  - {fileID: 676117382}
+  - {fileID: 1610715606}
   _secondPoutePoint: {fileID: 1610715606}
   _acceptablePproximity: 0.5
   _speed: 2

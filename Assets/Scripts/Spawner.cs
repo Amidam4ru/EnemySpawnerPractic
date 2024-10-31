@@ -8,26 +8,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _spawnTime = 2f;
 
     private WaitForSeconds _spawnDeley;
-    private Coroutine _spawnEnemyCorutine;
 
     private void Awake()
     {
         _spawnDeley = new WaitForSeconds(_spawnTime);
-    }
 
-    private void OnEnable()
-    {
-        if (_spawnEnemyCorutine != null)
-        {
-            StopCoroutine(_spawnEnemyCorutine);
-        }
-
-        _spawnEnemyCorutine = StartCoroutine(SpawnEnemy());
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(_spawnEnemyCorutine);
+        StartCoroutine(SpawnEnemy());
     }
 
     private IEnumerator SpawnEnemy()

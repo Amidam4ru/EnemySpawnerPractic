@@ -39,9 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Target collisionTarget;
-
-        if (collision.transform.TryGetComponent<Target>(out collisionTarget) && collisionTarget == _target)
+        if (collision.transform.TryGetComponent<Target>(out Target collisionTarget) && collisionTarget == _target)
         {
             Finished?.Invoke(this);
         }

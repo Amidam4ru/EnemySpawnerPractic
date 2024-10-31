@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    [SerializeField] private Transform _firstPoutePoint;
+    [SerializeField] private Transform[] _routePoints;
     [SerializeField] private Transform _secondPoutePoint;
     [SerializeField] private float _acceptablePproximity;
     [SerializeField] private float _speed;
 
     private Vector3 _target;
+    private int _targetCount;
 
     private void Start()
     {
-        _target = _firstPoutePoint.position;
+        _targetCount = 0;
+        _target = _routePoints[_targetCount].position;
     }
 
     private void Update()
@@ -20,7 +22,14 @@ public class Target : MonoBehaviour
 
         if (Vector3.Distance(transform.position, _target) <= _acceptablePproximity)
         {
-            _target = _target == _firstPoutePoint.position ? _secondPoutePoint.position : _firstPoutePoint.position;
+            _targetCount++;
+
+            if (_targetCount == _routePoints.Length)
+            {
+                _targetCount = 0;
+            }
+
+            _target = _routePoints[_targetCount].position;
         }
     }
 }

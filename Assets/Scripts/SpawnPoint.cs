@@ -44,6 +44,7 @@ public class SpawnPoint : MonoBehaviour
         Enemy enemy = Instantiate(_enemyPrefab);
         enemy.SetTarget(Target);
         enemy.Finished += ReleaseEnemy;
+        _signedEnemies.Add(enemy);
 
         return enemy;
     }
@@ -65,6 +66,5 @@ public class SpawnPoint : MonoBehaviour
     {
         enemy.transform.position = transform.position;
         enemy.gameObject.SetActive(true);
-        _signedEnemies.Add(enemy);
     }
 }
